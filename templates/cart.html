@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Your cart – ShopLane{% endblock %}
+{% block content %}
+<h1>Your cart</h1>
+{% if rows %}
+  <table>
+    <tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr>
+    {% for item, product in rows %}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td>₹{{ '%.2f'|format(product.price) }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>₹{{ '%.2f'|format(product.price * item.quantity) }}</td>
+      <td>
+        <form method="post" action="/cart/remove/{{ item.id }}">
+          <button class="link-btn">Remove</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="3"><b>Total</b></td><td colspan="2"><b>₹{{ '%.2f'|format(total) }}</b></td></tr>
+  </table>
+{% else %}
+  <p>Your cart is empty. <a href="/products">Go to products</a></p>
+{% endif %}
+{% endblock %}

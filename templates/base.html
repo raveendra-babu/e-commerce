@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ShopLane{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container bar">
+      <a href="/" class="brand">ShopLane</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        {% if user %}
+          <a href="/cart">Cart{% if cart_count %} <span class="badge">{{ cart_count }}</span>{% endif %}</a>
+          <span class="muted">Hi, {{ user.name }}</span>
+          <a href="/logout">Log out</a>
+        {% else %}
+          <a href="/login">Log in</a>
+          <a href="/register" class="btn btn-small">Create account</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% if message %}
+      <p class="message">{{ message }}</p>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="container muted foot">ShopLane demo store built with FastAPI</footer>
+</body>
+</html>

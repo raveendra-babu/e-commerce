@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+cryptography
+jinja2
+python-multipart
+itsdangerous

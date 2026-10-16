@@ -1,0 +1,21 @@
+<article class="card">
+  {% if p.image_url %}
+    <img src="{{ p.image_url }}" alt="{{ p.name }}" class="card-img">
+  {% else %}
+    <div class="card-img placeholder">{{ p.name[0] }}</div>
+  {% endif %}
+  <div class="card-body">
+    <h3>{{ p.name }}</h3>
+    <p class="muted">{{ p.description[:80] }}{% if p.description|length > 80 %}…{% endif %}</p>
+    <div class="price-row">
+      <strong>₹{{ '%.2f'|format(p.price) }}</strong>
+      {% if p.stock > 0 %}
+        <form method="post" action="/cart/add/{{ p.id }}">
+          <button class="btn btn-small" type="submit">Add to cart</button>
+        </form>
+      {% else %}
+        <span class="muted">Out of stock</span>
+      {% endif %}
+    </div>
+  </div>
+</article>

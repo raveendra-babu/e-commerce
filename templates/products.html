@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Products – ShopLane{% endblock %}
+{% block content %}
+<h1>All products</h1>
+{% if products %}
+  <div class="grid">
+    {% for p in products %}{% include "_product_card.html" %}{% endfor %}
+  </div>
+{% else %}
+  <p class="muted">No products yet. Insert some rows into the <code>products</code> table in MySQL and refresh.</p>
+{% endif %}
+{% endblock %}
